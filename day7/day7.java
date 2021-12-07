@@ -11,11 +11,7 @@ public class day7 {
         int lowest = -1;
 
         for (int k = 0; k < 2000; k++) {
-            int sum = 0;
             int cost = 0;
-            for (int i = 0; i < input.length; i++) {
-                sum += Integer.parseInt(input[i]);
-            }
             for (int i = 0; i < input.length; i++) {
                 cost += Math.abs(Integer.parseInt(input[i]) - k);
             }

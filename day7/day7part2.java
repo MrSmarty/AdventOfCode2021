@@ -11,7 +11,6 @@ public class day7part2 {
         int lowest = -1;
 
         for (int k = 0; k < 2000; k++) {
-            int sum = 0;
             int cost = 0;
 
             for (int i = 0; i < input.length; i++) {
