@@ -38,8 +38,8 @@ public class day8part2 {
                 // Solve for LCD 0
                 if (lcds[0] == null) {
                     for (int j = 0; j < 3; j++) {
-                        if (patterns[4].contains(patterns[7].substring(j, j + 1)) == false) {
-                            lcds[0] = patterns[7].substring(j, j + 1);
+                        if (patterns[7].contains(patterns[4].substring(j, j + 1)) == false) {
+                            lcds[0] = patterns[4].substring(j, j + 1);
                         }
                     }
                     System.out.println(lcds[0]);
