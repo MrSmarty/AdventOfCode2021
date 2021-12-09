@@ -4,9 +4,9 @@ import java.util.*;
 public class day8part2 {
     public static void main(String[] args) throws IOException {
         Scanner scan = new Scanner(new File("day8single.txt"));
-        
+
         int numInputs = 1;
-        
+
         int total = 0;
         for (int i = 0; i < numInputs; i++) {
             String[] patterns = new String[10];
@@ -42,7 +42,7 @@ public class day8part2 {
                             lcds[0] = patterns[4].substring(j, j + 1);
                         }
                     }
-                    System.out.println(lcds[0]);
+                    // System.out.println(lcds[0]);
                 }
 
                 // Solve for 9
@@ -68,7 +68,7 @@ public class day8part2 {
                         }
                     }
                 }
-                
+
                 // Solve for 0
                 if (solutions[0] == null) {
                     for (int j = 0; j < 10; j++) {
@@ -92,8 +92,8 @@ public class day8part2 {
                     String[] chars = solutions[0].split("");
                     Arrays.sort(chars);
                     for (int j = 0; j < chars.length; j++) {
-                        if (chars[j].equals((char)(97+j)) == false) {
-                            char c = (char)(97+j);
+                        if (chars[j].equals((char) (97 + j)) == false) {
+                            char c = (char) (97 + j);
                             lcds[3] = c + "";
                             // System.out.println("char: " + ((char)(97+j)) + " | chars: " + chars[j]);
                         }
@@ -106,8 +106,8 @@ public class day8part2 {
                     String[] chars = new String[2];
                     int n = 0;
                     for (int j = 0; j < 6; j++) {
-                        if (solutions[4].contains(solutions[9].substring(j, j+1)) == false) {
-                            chars[n] = solutions[9].substring(j, j+1);
+                        if (solutions[4].contains(solutions[9].substring(j, j + 1)) == false) {
+                            chars[n] = solutions[9].substring(j, j + 1);
                             n++;
                         }
                     }
@@ -122,7 +122,72 @@ public class day8part2 {
                 // Solve for 3
                 if (solutions[3] == null) {
                     solutions[3] = solutions[1] + lcds[0] + lcds[3] + lcds[6];
-                    System.out.println(solutions[3]);
+                    // System.out.println(solutions[3]);
+                }
+
+                // Solve for 6
+                if (solutions[6] == null) {
+                    int[] index6 = new int[3];
+                    int n = 0;
+                    for (int k = 0; k < 10; k++) {
+                        if (patterns[k].length() == 6) {
+                            index6[n] = k;
+                            n++;
+                        }
+                    }
+
+                    for (int l = 0; l < 3; l++) {
+                        char[] arr = patterns[index6[l]].toCharArray();
+                        if (Arrays.equals(arr, solutions[0].toCharArray()) == false
+                                && Arrays.equals(arr, solutions[9].toCharArray()) == false) {
+                            solutions[6] = patterns[index6[l]];
+                        }
+                    }
+
+                    // System.out.println(solutions[6]);
+                }
+
+                // Solve for 2 and 5
+                if (solutions[2] == null && solutions[5] == null) {
+                    char[] six = solutions[6].toCharArray();
+                    int arr1Index = 0;
+                    int arr2Index = 0;
+                    int n = 0;
+                    for (int g = 0; g < 10; g++) {
+                        if (solutions[g] == null) {
+                            if (n == 0) {
+                                // arr1 = solutions[g].toCharArray();
+                                arr1Index = g;
+                                n++;
+                            } else {
+                                // arr2 = solutions[g].toCharArray();
+                                arr2Index = g;
+                                System.out.println(arr2Index);
+                            }
+                        }
+                    }
+                    char[] arr1 = patterns[arr1Index].toCharArray();
+                    char[] arr2 = patterns[arr2Index].toCharArray();
+                    Arrays.sort(arr1);
+                    Arrays.sort(arr2);
+                    Arrays.sort(six);
+                    int common = 0;
+                    for (int t = 0; t < arr1.length; t++) {
+                        if (Arrays.asList(six).contains(arr1[t])) {
+                            common++;
+                        }
+                    }
+                    if (common == 5) {
+                        solutions[5] = patterns[arr1Index];
+                        solutions[2] = patterns[arr2Index];
+                    } else {
+                        solutions[2] = patterns[arr1Index];
+                        solutions[5] = patterns[arr2Index];
+                    }
+                }
+
+                for (int h = 0; h < solutions.length; h++) {
+                    System.out.println(h + ": " + solutions[h]);
                 }
 
                 solved = true;
